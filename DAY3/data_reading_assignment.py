@@ -13,51 +13,64 @@ with open('matches .csv', 'r') as csv_file:
 # which team won by max run
 # which team won by closest margin by Runs 
 # which team is most successful
-seasons = []
 
-count = 0
-for i in list_of_matches:
-    if count == 0:
-        count += 1
-        continue
-    if i[1] not in seasons:
-        seasons.append(i[1])
+# seasons = []
 
-print(len(seasons))
+# count = 0
+# for i in list_of_matches:
+#     if count == 0:
+#         count += 1
+#         continue
+#     if i[1] not in seasons:
+#         seasons.append(i[1])
 
-team_won_max_runs = ''
-curr = 0
-count = 0
-for i in list_of_matches:
-    if count == 0:
-        count += 1
-        continue
-    if int(i[11]) > int(curr):
-        curr = i[11]
-        team_won_max_runs = i[10]
+# print(len(seasons))
 
-print(team_won_max_runs)
+# team_won_max_runs = ''
+# curr = 0
+# count = 0
+# for i in list_of_matches:
+#     if count == 0:
+#         count += 1
+#         continue
+#     if int(i[11]) > int(curr):
+#         curr = i[11]
+#         team_won_max_runs = i[10]
 
-count = 0
-closest_margin = 100000000
-team_with_closest_margin = []
-for i in list_of_matches:
-    if count == 0:
-        count += 1
-        continue 
+# print(team_won_max_runs)
 
-    if int(i[11]) < int(closest_margin):
-        team_with_closest_margin.clear()
-        if i[10] not in team_with_closest_margin:
-            team_with_closest_margin.append(i[10])
+# count = 0
+# closest_margin = 100000000
+# team_with_closest_margin = []
+# for i in list_of_matches:
+#     if count == 0:
+#         count += 1
+#         continue 
+
+#     if int(i[11]) < int(closest_margin):
+#         team_with_closest_margin.clear()
+#         if i[10] not in team_with_closest_margin:
+#             team_with_closest_margin.append(i[10])
             
 
-        closest_margin = i[11]
-    elif int(i[11]) == int(closest_margin):
-        if i[10] not in team_with_closest_margin:
-            team_with_closest_margin.append(i[10])
-print(team_with_closest_margin)
-print(curr)
+#         closest_margin = i[11]
+#     elif int(i[11]) == int(closest_margin):
+#         if i[10] not in team_with_closest_margin:
+#             team_with_closest_margin.append(i[10])
+# print(team_with_closest_margin)
+# print(curr)
 
 
+d = {}
+curr = 0
+team = ''
+for i in list_of_matches:
+    if i[10] in d:
+        d[i[10]] += 1
+    else:
+        d[i[10]] = 1
+    if curr < d[i[10]]:
+        curr = d[i[10]]
+        team = i[10]
 
+print(team)

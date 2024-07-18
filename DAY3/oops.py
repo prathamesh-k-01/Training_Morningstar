@@ -24,10 +24,14 @@ class Car():
         self.year = year
         self.price = price
 
-honda = Car('City', 2017,100000)
-tata = Car('bolt', 2010,500000)
+    def price_inc(kuch):
+        kuch.price =  kuch.price * 1.5
+
+honda = Car('City', 100000, 2017)
+tata = Car('bolt', 500000,2010)
 
 d = honda.__dict__
-print(type(d))
-
-print(honda.year)
+# print(type(d))
+honda.price_inc()
+print(honda.price)
+# print(honda.year)

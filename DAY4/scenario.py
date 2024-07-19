@@ -15,21 +15,25 @@ o	Amounts are monetary values preceded by a currency symbol like $ or ₹.
 '''
 
 def classify_query(query):
-    pattern_check = re.compile(r'.*How much\|What is\|Check data\.*')
+    pattern_check = re.compile(r'.*(how much data have I used|what is my data usage|check data usage)\.*')
     res_check = pattern_check.findall(query)
     if not res_check:
         pass
     else:
         print("The query is a check data query")
 
-    pattern_pay = re.compile(r'\.*Pay my bill\|I want to pay my bill\|Bill payment\|bill payemnt\.*')
+    pattern_pay = re.compile(r'.*(pay my bill|i want to pay my bill|bill payment)\.*')
     res_pay = pattern_pay.findall(query)
     if not res_pay:
         pass
 
     else:
         print("THIS IS A PAYING Query")
-    pattern_issue = re.compile(r'\.*not working\|fix my connection\|Fix my connection\|Troubleshoot internet\.*')
+
+
+
+
+    pattern_issue = re.compile(r'.*(my internet is not working|fix my connection|troubleshoot internet)\.*')
     res_issue = pattern_issue.findall(query)
     if res_issue:
         print("THe query is a issue query")
@@ -41,16 +45,16 @@ def extract_info(query):
     if not result_acc:
         pass
     else:
-        print(f'account number is {result_acc}')
+        print(f'account number is {result_acc[0]}')
     
     
-    pattern_date = re.compile(r'.*(\d{4}-\d{2}-\d{2}).*')
+    pattern_date = re.compile(r'.*(\d{4}/\d{2}/\d{2}).*')
     result_date = pattern_date.findall(query)
     if not result_date:
         pass
     
     else:
-        print(f'The date is {result_date}')
+        print(f'The date is {result_date[0]}')
 
 
     pattern_amount = re.compile(r'.*[$\|₹](\d+).*')
@@ -58,10 +62,10 @@ def extract_info(query):
     if not result_amount:
         pass
     else:
-        print(f"THe amount you have entered is {result_amount}")
+        print(f"THe amount you have entered is {result_amount[0]}")
 
 extract_info("My account number is 123456789123, THe date is 2024-07-19 today it is a Friday")
-extract_info("THe date is 2024-07-19 today it is a Friday ")
-extract_info("Mere pass bohot $400 k note hai")
+extract_info("THe date is 2024/07/19 today it is a Friday ")
+extract_info("Mere pass bohot 400 dollars. k note hai")
 
 classify_query("mere gharka internet nahi chal rha fix my connection")
